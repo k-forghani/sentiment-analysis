@@ -2,7 +2,7 @@ import csv
 
 
 data = []
-with open('dataset.csv', 'r') as file:
+with open('data/raw.csv', 'r') as file:
 
     reader = csv.reader(file)
 
@@ -16,7 +16,7 @@ for i in range(len(data)):
 	else:
 		data[i][1]='0'
 
-with open("data.csv", mode="w", newline="") as file:
+with open("data/data.csv", mode="w", newline="") as file:
     writer = csv.writer(file)
     for row in data:
         writer.writerow(row)
