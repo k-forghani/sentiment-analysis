@@ -22,11 +22,11 @@ with open('data/raw.csv', 'r') as file:
         data.append(row)
 
 data.pop(0)
+final=''
 for i in range(len(data)):
     lower_case=data[i][0].lower()
     cleaned=lower_case.translate(str.maketrans('','', string.punctuation))
     tokenized=cleaned.split()
-    final=''
     for x in tokenized:
         if x not in stop_words:
             final+=x+' '
@@ -39,7 +39,7 @@ for i in range(len(data)):
         data[i][1]='0'
 
 
-
+print(len(final))
 
 
 # with open("data/data.csv", mode="w", newline="") as file:
