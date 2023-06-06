@@ -1,0 +1,48 @@
+import csv
+import string 
+
+stop_words = ["i", "me", "my", "myself", "we", "our", "ours", "ourselves", "you", "your", "yours", "yourself",
+              "yourselves", "he", "him", "his", "himself", "she", "her", "hers", "herself", "it", "its", "itself",
+              "they", "them", "their", "theirs", "themselves", "what", "which", "who", "whom", "this", "that", "these",
+              "those", "am", "is", "are", "was", "were", "be", "been", "being", "have", "has", "had", "having", "do",
+              "does", "did", "doing", "a", "an", "the", "and", "but", "if", "or", "because", "as", "until", "while",
+              "of", "at", "by", "for", "with", "about", "against", "between", "into", "through", "during", "before",
+              "after", "above", "below", "to", "from", "up", "down", "in", "out", "on", "off", "over", "under", "again",
+              "further", "then", "once", "here", "there", "when", "where", "why", "how", "all", "any", "both", "each",
+              "few", "more", "most", "other", "some", "such", "no", "nor", "not", "only", "own", "same", "so", "than",
+              "too", "very", "s", "t", "can", "will", "just", "don", "should", "now"]
+
+
+data = []
+with open('data/raw.csv', 'r') as file:
+
+    reader = csv.reader(file)
+
+    for row in reader:
+        data.append(row)
+
+data.pop(0)
+for i in range(len(data)):
+    lower_case=data[i][0].lower()
+    cleaned=lower_case.translate(str.maketrans('','', string.punctuation))
+    tokenized=cleaned.split()
+    final=''
+    for x in tokenized:
+        if x not in stop_words:
+            final+=x+' '
+    data[i][0]=final
+
+
+    if data[i][1]=='Positive':
+        data[i][1]='1'
+    else:
+        data[i][1]='0'
+
+
+
+
+
+# with open("data/data.csv", mode="w", newline="") as file:
+#     writer = csv.writer(file)
+#     for row in data:
+#         writer.writerow(row)
